@@ -1,14 +1,13 @@
 package com.example.apiversioning.api.customer.dto.versioning;
 
-import com.example.apiversioning.api.customer.dto.AddressDto;
+import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
+import com.example.apiversioning.api.customer.dto.CustomerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 @AllArgsConstructor
-public class CustomerDtoV3 {
+public class CustomerDtoV3 implements CustomerDtoVersionable {
 
     private String firstName;
 
@@ -20,4 +19,18 @@ public class CustomerDtoV3 {
 
     private AddressDtoV2 address;
 
+    @Override
+    public CustomerDtoVersionable convertUp() {
+        return null;
+    }
+
+    @Override
+    public CustomerDtoVersionable convertDown() {
+        return null;
+    }
+
+    @Override
+    public CustomerDto toCustomerDto() {
+        return null;
+    }
 }
