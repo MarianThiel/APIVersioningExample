@@ -18,7 +18,7 @@ public class CustomerVersioningService {
         CustomerDtoVersionable current = input;
         CustomerDtoVersionable prev = null;
         while(prev != current){
-            if(current.getClass().isInstance(target)){
+            if(target.isInstance(current)){
                 //noinspection unchecked
                 return (T) current;
             }
