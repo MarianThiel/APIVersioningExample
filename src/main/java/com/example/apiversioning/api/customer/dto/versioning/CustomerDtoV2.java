@@ -2,7 +2,6 @@ package com.example.apiversioning.api.customer.dto.versioning;
 
 import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
 import com.example.apiversioning.api.customer.dto.AddressDto;
-import com.example.apiversioning.api.customer.dto.CustomerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,16 +19,27 @@ public class CustomerDtoV2 implements CustomerDtoVersionable {
 
     @Override
     public CustomerDtoVersionable convertUp() {
-        return null;
+        return new CustomerDtoV3(
+                name,
+                "N/A",
+                phoneNumber,
+                "N/A",
+                new AddressDtoV2(
+                        firstAddress.getCity(),
+                        firstAddress.getAddressLine(),
+                        "N/A"
+                )
+        );
     }
 
     @Override
     public CustomerDtoVersionable convertDown() {
-        return null;
+        return new CustomerDtoV1(
+                name,
+                phoneNumber,
+                firstAddress
+        );
     }
 
-    @Override
-    public CustomerDto toCustomerDto() {
-        return null;
-    }
+
 }
