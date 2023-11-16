@@ -1,14 +1,13 @@
 package com.example.apiversioning.api.common.conv.adapter;
 
-import com.example.apiversioning.api.common.conv.Adapter;
+import com.example.apiversioning.api.common.conv.ObjectTransformer;
 import com.example.apiversioning.api.customer.dto.CustomerDto;
-import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV1;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
 
 import java.util.List;
 
-public class CustomerDtoV3V4Adapter extends Adapter<CustomerDtoV3, CustomerDto> {
-    public CustomerDtoV3V4Adapter() {
+public class CustomerDtoV3V4ObjectTransformer extends ObjectTransformer<CustomerDtoV3, CustomerDto> {
+    public CustomerDtoV3V4ObjectTransformer() {
         super(CustomerDtoV3.class, CustomerDto.class);
     }
 

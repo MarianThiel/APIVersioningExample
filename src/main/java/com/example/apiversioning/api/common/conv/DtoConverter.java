@@ -1,15 +1,15 @@
 package com.example.apiversioning.api.common.conv;
 
 public class DtoConverter {
-    private Adapter<?,?>[] adapters;
+    private ObjectTransformer<?,?>[] objectTransformers;
 
-    public DtoConverter(Adapter<?,?>... adapters) {
-        this.adapters = adapters;
+    public DtoConverter(ObjectTransformer<?,?>... objectTransformers) {
+        this.objectTransformers = objectTransformers;
     }
 
     private int findAdapter(Object input){
-        for(int i = 0; i < adapters.length; i++){
-            if(adapters[i].getLowerVersionClass().isInstance(input)){
+        for(int i = 0; i < objectTransformers.length; i++){
+            if(objectTransformers[i].getLowerVersionClass().isInstance(input)){
                 return i;
             }
         }
@@ -18,8 +18,8 @@ public class DtoConverter {
    public <T> T convertUp(Object input, Class<T> outputClass) {
         Object currentObj = input;
 
-        for (int i = findAdapter(input); i < adapters.length; i++) {
-            currentObj = adapters[i].convertForward(currentObj);
+        for (int i = findAdapter(input); i < objectTransformers.length; i++) {
+            currentObj = objectTransformers[i].convertForward(currentObj);
             if (currentObj.getClass() == outputClass) {
                 //noinspection unchecked
                 return (T) currentObj;
@@ -32,7 +32,7 @@ public class DtoConverter {
         Object currentObj = input;
 
         for (int i = findAdapter(input); i >= 0 ; i--) {
-            currentObj = adapters[i].convertBackward(currentObj);
+            currentObj = objectTransformers[i].convertBackward(currentObj);
             if (currentObj.getClass() == outputClass) {
                 //noinspection unchecked
                 return (T) currentObj;

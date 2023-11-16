@@ -1,6 +1,6 @@
 package com.example.apiversioning.api.common.conv;
 
-public abstract class Adapter<V1, V2> {
+public abstract class ObjectTransformer<V1, V2> {
 
     private Class<V1> lowerVersionClass;
     private Class<V2> higherVersionClass;
@@ -9,7 +9,7 @@ public abstract class Adapter<V1, V2> {
 
     protected abstract V1 convertBackward(Object input); // T extends <Interface>
 
-    public Adapter(Class<V1> lowerVersionClass, Class<V2> higherVersionClass) {
+    public ObjectTransformer(Class<V1> lowerVersionClass, Class<V2> higherVersionClass) {
         this.lowerVersionClass = lowerVersionClass;
         this.higherVersionClass = higherVersionClass;
     }
