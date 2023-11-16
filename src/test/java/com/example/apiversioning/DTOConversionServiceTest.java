@@ -4,7 +4,10 @@ package com.example.apiversioning;
 import com.example.apiversioning.api.common.versioning.CustomerVersioningService;
 import com.example.apiversioning.api.customer.dto.AddressDto;
 import com.example.apiversioning.api.customer.dto.CustomerDto;
+import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
+import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV1;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV2;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class DTOConversionServiceTest {
@@ -17,6 +20,18 @@ public class DTOConversionServiceTest {
 
         CustomerDto highestCustomer = customerVersioningService.toCustomerDto(customerDtoV2);
 
-        System.out.println(highestCustomer);
+        Assertions.assertEquals(highestCustomer.getFirstName(), customerDtoV2.getName());
+    }
+
+    @Test
+    public void convertToLowerVersionTest(){
+        AddressDtoV2 addressDto = new AddressDtoV2("Darmstadt","Musterstraße 2", "64287");
+        CustomerVersioningService customerVersioningService = new CustomerVersioningService();
+
+        CustomerDto customerDto = new CustomerDto("Max", "Mustermann", 1234, "max.mustermann@test.de", addressDto);
+
+        CustomerDtoV1 customerDtoV1 = customerVersioningService.fromCustomerDto(customerDto, CustomerDtoV1.class);
+
+        Assertions.assertEquals("Max Mustermann", customerDtoV1.getName());
     }
 }

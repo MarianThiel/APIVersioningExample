@@ -3,9 +3,9 @@ package com.example.apiversioning.api.customer.dto.versioning;
 import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
 import com.example.apiversioning.api.customer.dto.AddressDto;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class CustomerDtoV2 implements CustomerDtoVersionable {
 
