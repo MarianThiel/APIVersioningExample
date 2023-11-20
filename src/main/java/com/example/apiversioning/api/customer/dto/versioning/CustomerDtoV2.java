@@ -1,7 +1,6 @@
 package com.example.apiversioning.api.customer.dto.versioning;
 
 import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
-import com.example.apiversioning.api.customer.dto.AddressDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,9 +12,9 @@ public class CustomerDtoV2 implements CustomerDtoVersionable {
 
     private int phoneNumber;
 
-    private AddressDto firstAddress;
+    private AddressDtoV2 firstAddress;
 
-    private AddressDto secondAddress;
+    private AddressDtoV2 secondAddress;
 
     @Override
     public CustomerDtoVersionable convertUp() {
@@ -37,7 +36,10 @@ public class CustomerDtoV2 implements CustomerDtoVersionable {
         return new CustomerDtoV1(
                 name,
                 phoneNumber,
-                firstAddress
+                new AddressDtoV1(
+                        firstAddress.getCity(),
+                        firstAddress.getAddressLine()
+                )
         );
     }
 

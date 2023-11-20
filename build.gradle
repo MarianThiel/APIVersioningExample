@@ -20,8 +20,9 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.28'
 
 	implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0"
+	implementation "org.springdoc:springdoc-openapi-ui:1.7.0"
 
-	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 

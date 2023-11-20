@@ -1,14 +1,17 @@
 package com.example.apiversioning.api.common.versioning;
 
+import com.example.apiversioning.api.customer.dto.AddressDto;
 import com.example.apiversioning.api.customer.dto.CustomerDto;
+import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
-
+import org.springframework.stereotype.Service;
 
 
 /**
  * Problematic at runtime, requires to chain all Versionable objects together.
  * Also cyclic chaining is possible as well as none reachable versions
  */
+@Service
 public class CustomerVersioningService {
     private final Class<CustomerDtoV3> HIGHEST_VERSION_CLASS = CustomerDtoV3.class;
 
@@ -74,7 +77,11 @@ public class CustomerVersioningService {
                 highestVersionElement.getLastName(),
                 highestVersionElement.getPhoneNumber(),
                 highestVersionElement.getEmail(),
-                highestVersionElement.getAddress()
+                new AddressDto(
+                        highestVersionElement.getAddress().getCity(),
+                        highestVersionElement.getAddress().getAddressLine(),
+                        highestVersionElement.getAddress().getAddressLine2()
+                )
         );
     }
 
@@ -84,7 +91,11 @@ public class CustomerVersioningService {
             customerDto.getLastName(),
             customerDto.getPhoneNumber(),
             customerDto.getEmail(),
-            customerDto.getAddress()
+            new AddressDtoV2(
+                    customerDto.getAddress().getCity(),
+                    customerDto.getAddress().getAddressLine(),
+                    customerDto.getAddress().getAddressLine2()
+            )
         );
     }
 

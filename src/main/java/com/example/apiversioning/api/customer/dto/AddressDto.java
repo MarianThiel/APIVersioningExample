@@ -8,4 +8,5 @@ import lombok.Getter;
 public class AddressDto {
     private String city;
     private String addressLine;
+    private String addressLine2;
 }

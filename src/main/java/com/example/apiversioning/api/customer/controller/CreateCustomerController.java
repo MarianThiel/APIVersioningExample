@@ -1,11 +1,16 @@
 package com.example.apiversioning.api.customer.controller;
 
 
+import com.example.apiversioning.api.common.versioning.CustomerVersioningService;
 import com.example.apiversioning.api.customer.dto.CustomerDto;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV1;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV2;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
+import com.example.apiversioning.api.customer.mapper.CustomerMapper;
+import com.example.apiversioning.core.entities.Customer;
 import com.example.apiversioning.core.usecase.CreateCustomerUseCase;
+import com.example.apiversioning.core.usecase.GetCustomerUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,29 +19,32 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @AllArgsConstructor
-
 public class CreateCustomerController {
 
     private CreateCustomerUseCase createCustomerUseCase;
+    
+    private CustomerVersioningService customerVersioningService;
 
-
+    @Operation(summary = "Create Customer (Version 3)")
     @PostMapping(value = "/customers", headers = "X-API-Version=1")
     public Mono<Void> createCustomerV1(@RequestBody CustomerDtoV1 customer){
-        return Mono.empty();
+        CustomerDto customerDto = customerVersioningService.toCustomerDto(customer);
+        Customer domainCustomer = CustomerMapper.toDomain(customerDto);
+        return createCustomerUseCase.createCustomer(domainCustomer);
     }
 
     @PostMapping(value = "/customers", headers = "X-API-Version=2")
     public Mono<Void> createCustomerV2(@RequestBody CustomerDtoV2 customer){
-        return Mono.empty();
+        CustomerDto customerDto = customerVersioningService.toCustomerDto(customer);
+        Customer domainCustomer = CustomerMapper.toDomain(customerDto);
+        return createCustomerUseCase.createCustomer(domainCustomer);
     }
 
     @PostMapping(value = "/customers", headers = "X-API-Version=3")
     public Mono<Void> createCustomerV3(@RequestBody CustomerDtoV3 customer){
-        return Mono.empty();
+        CustomerDto customerDto = customerVersioningService.toCustomerDto(customer);
+        Customer domainCustomer = CustomerMapper.toDomain(customerDto);
+        return createCustomerUseCase.createCustomer(domainCustomer);
     }
 
-    @PostMapping(value = "/customers", headers = "X-API-Version=4")
-    public Mono<Void> createCustomerV4(@RequestBody CustomerDto customer){
-        return Mono.empty();
-    }
 }

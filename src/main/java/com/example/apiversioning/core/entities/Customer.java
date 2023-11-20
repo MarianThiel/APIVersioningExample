@@ -1,7 +1,13 @@
 package com.example.apiversioning.core.entities;
 
-import com.example.apiversioning.api.customer.dto.AddressDto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Customer {
     private String firstName;
 
@@ -11,7 +17,7 @@ public class Customer {
 
     private String email;
 
-    private AddressDto firstAddress;
+    private Address firstAddress;
 
-    private AddressDto secondAddress;
+
 }

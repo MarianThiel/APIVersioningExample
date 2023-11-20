@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class AddressDtoV3 {
+public class AddressDtoV1 {
     private String city;
     private String addressLine;
 }

@@ -1,12 +1,7 @@
 package com.example.apiversioning.api.customer.dto;
 
-import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
-import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +16,7 @@ public class CustomerDto {
 
     private String email;
 
-    private AddressDtoV2 address;
+    private AddressDto address;
 
 
 }
