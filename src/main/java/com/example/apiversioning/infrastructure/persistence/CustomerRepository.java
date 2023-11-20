@@ -15,7 +15,7 @@ import java.util.Map;
 @Repository
 public class CustomerRepository implements CreateCustomerPort, GetCustomerPort {
 
-    private Map<CustomerId, Customer> customers = new HashMap<>();
+    private final Map<CustomerId, Customer> customers = new HashMap<>();
 
     private static int currentCustomerId = 1;
     public CustomerRepository(){
@@ -25,6 +25,7 @@ public class CustomerRepository implements CreateCustomerPort, GetCustomerPort {
         return new CustomerId(currentCustomerId++);
     }
     private void addCustomer(Customer c){
+        System.out.println(c + "Created");
         customers.put(getNewCustomerId(), c);
     }
     private void populate(){

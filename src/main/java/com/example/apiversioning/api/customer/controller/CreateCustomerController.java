@@ -9,8 +9,8 @@ import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
 import com.example.apiversioning.api.customer.mapper.CustomerMapper;
 import com.example.apiversioning.core.entities.Customer;
 import com.example.apiversioning.core.usecase.CreateCustomerUseCase;
-import com.example.apiversioning.core.usecase.GetCustomerUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 public class CreateCustomerController {
 
     private CreateCustomerUseCase createCustomerUseCase;
-    
+
     private CustomerVersioningService customerVersioningService;
 
     @Operation(summary = "Create Customer (Version 3)")
@@ -41,7 +41,7 @@ public class CreateCustomerController {
     }
 
     @PostMapping(value = "/customers", headers = "X-API-Version=3")
-    public Mono<Void> createCustomerV3(@RequestBody CustomerDtoV3 customer){
+    public Mono<Void> createCustomerV3(@RequestBody @Nonnull CustomerDtoV3 customer){
         CustomerDto customerDto = customerVersioningService.toCustomerDto(customer);
         Customer domainCustomer = CustomerMapper.toDomain(customerDto);
         return createCustomerUseCase.createCustomer(domainCustomer);

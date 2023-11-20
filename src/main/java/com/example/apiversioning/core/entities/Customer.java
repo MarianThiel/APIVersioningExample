@@ -20,4 +20,14 @@ public class Customer {
     private Address firstAddress;
 
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", firstAddress=" + firstAddress +
+                '}';
+    }
 }
