@@ -1,0 +1,41 @@
+struct CustomerDtoV1{
+    String name;
+    String phoneNumber;
+    List<AddressDtoV1> addresses;
+    map(CustomerDtoV2 as c) {
+        c.firstName -> name;
+        c.lastName -> "N/A";
+        c.phoneNumber -> reflect;
+        c.addresses -> AddressDtoV2.map;
+    }
+}
+
+struct CustomerDtoV2{
+    String firstName;
+    String lastName;
+    String phoneNumber;
+    List<AddressDtoV2> addresses;
+
+    map(CustomerDtoV3 as c) {
+        c.firstName -> reflect;
+        c.lastName -> reflect;
+        c.phoneNumber -> reflect;
+        c.address -> {
+            addresses[0];
+        }
+    }
+}
+
+struct CustomerDtoV3{
+    String firstName;
+    String lastName;
+    String phoneNumber;
+    AddressDtoV2 address;
+}
+
+
+struct AddressDtoV1{
+    String city;
+    String postalCode;
+    String addressLine;
+}

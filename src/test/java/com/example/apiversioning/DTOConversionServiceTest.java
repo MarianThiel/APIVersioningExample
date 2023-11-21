@@ -14,7 +14,7 @@ public class DTOConversionServiceTest {
 
     @Test
     public void convertToLatestTest(){
-        AddressDto addressDto = new AddressDto("Frankfurt","Musterstraße 2");
+        AddressDtoV2 addressDto = new AddressDtoV2("Frankfurt","Musterstraße 2", "");
         CustomerDtoV2 customerDtoV2 = new CustomerDtoV2("Max", 2131, addressDto, addressDto);
         CustomerVersioningService customerVersioningService = new CustomerVersioningService();
 
@@ -25,7 +25,7 @@ public class DTOConversionServiceTest {
 
     @Test
     public void convertToLowerVersionTest(){
-        AddressDtoV2 addressDto = new AddressDtoV2("Darmstadt","Musterstraße 2", "64287");
+        AddressDto addressDto = new AddressDto("Darmstadt","Musterstraße 2", "64287");
         CustomerVersioningService customerVersioningService = new CustomerVersioningService();
 
         CustomerDto customerDto = new CustomerDto("Max", "Mustermann", 1234, "max.mustermann@test.de", addressDto);
