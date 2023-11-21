@@ -1,13 +1,13 @@
 package com.example.apiversioning.api.customer.dto.versioning;
 
-import com.example.apiversioning.api.common.versioning.CustomerDtoVersionable;
+import com.example.apiversioning.api.common.versioning.DtoVersionable;
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CustomerDtoV3 implements CustomerDtoVersionable {
+public class DtoV3 implements DtoVersionable {
 
     private String firstName;
 
@@ -20,14 +20,14 @@ public class CustomerDtoV3 implements CustomerDtoVersionable {
     @Nonnull private AddressDtoV2 address;
 
     @Override
-    public CustomerDtoVersionable convertUp() {
+    public DtoVersionable convertUp() {
         return this;
     }
 
     @Override
-    public CustomerDtoVersionable convertDown() {
+    public DtoVersionable convertDown() {
 
-        return new CustomerDtoV2(
+        return new DtoV2(
                 firstName + " " + lastName,
                 phoneNumber,
                 address,
