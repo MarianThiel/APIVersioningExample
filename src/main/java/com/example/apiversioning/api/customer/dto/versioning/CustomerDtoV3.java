@@ -1,7 +1,5 @@
 package com.example.apiversioning.api.customer.dto.versioning;
 
-import com.example.apiversioning.api.common.versioning.HighestVersionable;
-import com.example.apiversioning.api.customer.dto.CustomerDto;
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +8,7 @@ import static com.example.apiversioning.api.common.util.VersioningServiceProvide
 
 @Data
 @AllArgsConstructor
-public class CustomerDtoV3 implements CustomerDtoVersionable, HighestVersionable<CustomerDto> {
+public class CustomerDtoV3 implements CustomerDtoVersionable {
 
 
 
@@ -26,7 +24,13 @@ public class CustomerDtoV3 implements CustomerDtoVersionable, HighestVersionable
 
     @Override
     public CustomerDtoVersionable convertUp() {
-        return this;
+        return new CustomerDtoV4(
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          addressVersioningService.convertUp(address, AddressDtoV3.class)
+        );
     }
 
     @Override
@@ -37,18 +41,6 @@ public class CustomerDtoV3 implements CustomerDtoVersionable, HighestVersionable
                 phoneNumber,
                 address,
                 address
-        );
-    }
-
-
-    @Override
-    public CustomerDto toBaseDto() {
-        return new CustomerDto(
-                getFirstName(),
-                getLastName(),
-                getPhoneNumber(),
-                getEmail(),
-                addressVersioningService.toBaseDto(address)
         );
     }
 }
