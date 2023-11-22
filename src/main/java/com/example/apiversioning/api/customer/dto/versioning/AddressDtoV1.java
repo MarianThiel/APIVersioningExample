@@ -5,7 +5,21 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class AddressDtoV1 {
+public class AddressDtoV1 implements AddressDtoVersionable {
     private String city;
     private String addressLine;
+
+    @Override
+    public AddressDtoVersionable convertUp() {
+        return new AddressDtoV2(
+          city,
+          addressLine,
+          "N/A"
+        );
+    }
+
+    @Override
+    public AddressDtoVersionable convertDown() {
+        return this;
+    }
 }
