@@ -1,14 +1,14 @@
 package com.example.apiversioning.api.customer.dto;
 
 import com.example.apiversioning.api.common.versioning.VersioningBase;
+import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
-import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoVersionable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CustomerDto implements VersioningBase<CustomerDto, CustomerDtoV3> {
+public class CustomerDto implements VersioningBase<CustomerDtoV3> {
 
 
     private String firstName;
@@ -23,14 +23,17 @@ public class CustomerDto implements VersioningBase<CustomerDto, CustomerDtoV3> {
 
 
     @Override
-    public CustomerDtoV3 fromBaseToHighestDto(CustomerDto base) {
-        return null;
+    public CustomerDtoV3 toHighestDto() {
+        return new CustomerDtoV3(
+                getFirstName(),
+                getLastName(),
+                getPhoneNumber(),
+                getEmail(),
+                new AddressDtoV2(
+                        getAddress().getCity(),
+                        getAddress().getAddressLine(),
+                        getAddress().getAddressLine2()
+                )
+        );
     }
-
-    @Override
-    public CustomerDto toBaseFromHighestDto(CustomerDtoV3 highestVersion) {
-        return null;
-    }
-
-
 }
