@@ -8,6 +8,7 @@ import lombok.Getter;
 public class Address {
 
     private String city;
+    private String postalCode;
     private String addressLine;
     private String addressLine2;
 
@@ -15,6 +16,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
                 ", addressLine='" + addressLine + '\'' +
                 ", addressLine2='" + addressLine2 + '\'' +
                 '}';

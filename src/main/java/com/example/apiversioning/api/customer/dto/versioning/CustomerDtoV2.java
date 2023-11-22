@@ -1,16 +1,15 @@
 package com.example.apiversioning.api.customer.dto.versioning;
 
-import com.example.apiversioning.api.common.versioning.VersioningService;
-import com.example.apiversioning.api.common.versioning.VersioningServiceFactory;
-import com.example.apiversioning.api.customer.dto.AddressDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import static com.example.apiversioning.api.common.util.VersioningServiceProvider.addressVersioningService;
 
 @Data
 @AllArgsConstructor
 public class CustomerDtoV2 implements CustomerDtoVersionable {
 
-    private static VersioningService<AddressDtoVersionable, AddressDto, AddressDtoV2> versioningService = VersioningServiceFactory.createAddressVersioningService();
+
 
     private String name;
 
@@ -36,7 +35,7 @@ public class CustomerDtoV2 implements CustomerDtoVersionable {
         return new CustomerDtoV1(
                 name,
                 phoneNumber,
-                versioningService.convertDown(firstAddress, AddressDtoV1.class)
+                addressVersioningService.convertDown(firstAddress, AddressDtoV1.class)
         );
     }
 

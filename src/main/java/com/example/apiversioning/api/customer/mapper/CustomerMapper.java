@@ -15,6 +15,7 @@ public class CustomerMapper {
                 customerDto.getEmail(),
                 new Address(
                         customerDto.getAddress().getCity(),
+                        customerDto.getAddress().getPostalCode(),
                         customerDto.getAddress().getAddressLine(),
                         customerDto.getAddress().getAddressLine2()
                 )
@@ -30,6 +31,7 @@ public class CustomerMapper {
                 customer.getEmail(),
                 new AddressDto(
                  customer.getFirstAddress().getCity(),
+                 customer.getFirstAddress().getPostalCode(),
                  customer.getFirstAddress().getAddressLine(),
                  customer.getFirstAddress().getAddressLine2()
                 )

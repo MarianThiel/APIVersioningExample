@@ -35,28 +35,28 @@ public class CustomerRepository implements CreateCustomerPort, GetCustomerPort {
                         "Doe",
                         123,
                         "jon.doe@test.com",
-                        new Address("TestCity","Street 2a", "")
+                        new Address("TestCity","12345","Street 2a", "")
                 ),
                 new Customer(
                         "Eve",
                         "L",
                         1234,
                         "eve.l@test.com",
-                        new Address("TestCity","Street 2a", "")
+                        new Address("TestCity","","Street 2a", "")
                 ),
                 new Customer(
                         "Max",
                         "Mustermann",
                         123,
                         "max.mustermann@test.com",
-                        new Address("TestCity","Street 2a", "")
+                        new Address("TestCity","","Street 2a", "")
                 ),
                 new Customer(
                         "Chuck",
                         "Norris",
                         123,
                         "chuck.norris@test.com",
-                        new Address("TestCity","Street 2a", "")
+                        new Address("TestCity","", "Street 2a","")
                 )
         });
         cl.forEach(this::addCustomer);

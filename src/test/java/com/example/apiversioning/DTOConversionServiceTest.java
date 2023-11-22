@@ -22,7 +22,7 @@ public class DTOConversionServiceTest {
     @Test
     public void convertToLowerVersionTest(){
         VersioningService<CustomerDtoVersionable, CustomerDto, CustomerDtoV3> service = new VersioningService<>(CustomerDtoV3.class);
-        CustomerDto baseDto = new CustomerDto("Marian","Thiel",1,"marian.thiel@aoe.com", new AddressDto("Darmstadt","64287","Pützerstraße 2"));
+        CustomerDto baseDto = new CustomerDto("Marian","Thiel",1,"marian.thiel@aoe.com", new AddressDto("Darmstadt","64287","Pützerstraße 2","Etage 3"));
 
         CustomerDtoV1 v1 = service.fromBaseDtoToSpecificVersion(baseDto, CustomerDtoV1.class);
 
