@@ -4,6 +4,7 @@ import com.example.apiversioning.api.common.versioning.VersioningBase;
 import com.example.apiversioning.api.common.versioning.VersioningService;
 import com.example.apiversioning.api.common.versioning.VersioningServiceFactory;
 import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
+import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV3;
 import com.example.apiversioning.api.customer.dto.versioning.AddressDtoVersionable;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CustomerDto implements VersioningBase<CustomerDtoV3> {
 
-    private static VersioningService<AddressDtoVersionable, AddressDto, AddressDtoV2> versioningService = VersioningServiceFactory.createAddressVersioningService();
+    private static VersioningService<AddressDtoVersionable, AddressDto, AddressDtoV3> versioningService = VersioningServiceFactory.createAddressVersioningService();
 
     private String firstName;
 
