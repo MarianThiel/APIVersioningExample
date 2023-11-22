@@ -1,10 +1,10 @@
 package com.example.apiversioning.api.common.versioning;
 
-public interface DtoVersionable {
+public interface DtoVersionable<S extends DtoVersionable<?>> {
 
-    DtoVersionable convertUp();
+    S convertUp();
 
-    DtoVersionable convertDown();
+    S convertDown();
 
 
 }

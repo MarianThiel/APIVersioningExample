@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DtoV1 implements DtoVersionable {
+public class CustomerDtoV1 implements CustomerDtoVersionable {
 
     private String name;
 
@@ -15,8 +15,8 @@ public class DtoV1 implements DtoVersionable {
     private AddressDtoV1 firstAddress;
 
     @Override
-    public DtoVersionable convertUp() {
-        return new DtoV2(
+    public CustomerDtoVersionable convertUp() {
+        return new CustomerDtoV2(
                 name,
                 phoneNumber,
                 new AddressDtoV2(
@@ -33,7 +33,7 @@ public class DtoV1 implements DtoVersionable {
     }
 
     @Override
-    public DtoVersionable convertDown() {
+    public CustomerDtoVersionable convertDown() {
         return this;
     }
 
