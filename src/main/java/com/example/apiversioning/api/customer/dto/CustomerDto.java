@@ -1,7 +1,10 @@
 package com.example.apiversioning.api.customer.dto;
 
 import com.example.apiversioning.api.common.versioning.VersioningBase;
+import com.example.apiversioning.api.common.versioning.VersioningService;
+import com.example.apiversioning.api.common.versioning.VersioningServiceFactory;
 import com.example.apiversioning.api.customer.dto.versioning.AddressDtoV2;
+import com.example.apiversioning.api.customer.dto.versioning.AddressDtoVersionable;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +13,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CustomerDto implements VersioningBase<CustomerDtoV3> {
 
+    private static VersioningService<AddressDtoVersionable, AddressDto, AddressDtoV2> versioningService = VersioningServiceFactory.createAddressVersioningService();
 
     private String firstName;
 
@@ -29,11 +33,7 @@ public class CustomerDto implements VersioningBase<CustomerDtoV3> {
                 getLastName(),
                 getPhoneNumber(),
                 getEmail(),
-                new AddressDtoV2(
-                        getAddress().getCity(),
-                        getAddress().getAddressLine(),
-                        getAddress().getAddressLine2()
-                )
+                versioningService.fromBaseDtoToSpecificVersion(address, AddressDtoV2.class)
         );
     }
 }
