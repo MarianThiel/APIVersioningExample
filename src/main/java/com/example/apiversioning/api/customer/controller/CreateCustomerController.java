@@ -5,6 +5,7 @@ import com.example.apiversioning.api.customer.dto.CustomerDto;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV1;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV2;
 import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV3;
+import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoV4;
 import com.example.apiversioning.api.customer.mapper.CustomerMapper;
 import com.example.apiversioning.core.entities.Customer;
 import com.example.apiversioning.core.usecase.CreateCustomerUseCase;
@@ -51,4 +52,10 @@ public class CreateCustomerController {
         return createCustomerUseCase.createCustomer(domainCustomer);
     }
 
+    @PostMapping(value = "/customers", headers = "X-API-Version=4")
+    public Mono<Void> createCustomerV4(@RequestBody @Nonnull CustomerDtoV4 customer){
+        CustomerDto customerDto = customerVersioningService.toBaseDto(customer);
+        Customer domainCustomer = CustomerMapper.toDomain(customerDto);
+        return createCustomerUseCase.createCustomer(domainCustomer);
+    }
 }
