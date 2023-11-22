@@ -1,15 +1,9 @@
 package com.example.apiversioning.api.common.versioning;
 
-import com.example.apiversioning.api.customer.dto.CustomerDto;
-import com.example.apiversioning.api.customer.dto.versioning.CustomerDtoVersionable;
-import org.springframework.stereotype.Service;
-
-
 /**
  * Problematic at runtime, requires to chain all Versionable objects together.
  * Also cyclic chaining is possible as well as none reachable versions
  */
-@Service
 public class VersioningService<C extends DtoVersionable<C>, B extends VersioningBase<H>, H extends HighestVersionable<B>> {
     private final Class<? extends C> highestVersion;
 
@@ -30,10 +24,6 @@ public class VersioningService<C extends DtoVersionable<C>, B extends Versioning
             current = current.convertUp();
 
         }
-        if(current.getClass().isInstance(target)){
-            //noinspection unchecked
-            return (T) current;
-        }
 
         throw new IllegalStateException(("target class %s is not reachable").formatted(target));
     }
@@ -51,16 +41,12 @@ public class VersioningService<C extends DtoVersionable<C>, B extends Versioning
             current = current.convertDown();
 
         }
-        if(current.getClass().isInstance(target)){
-            //noinspection unchecked
-            return (T) current;
-        }
 
         throw new IllegalStateException(("target class %s is not reachable").formatted(target));
     }
 
-    public B toBaseDto(C inputCustomerDto){
-        C highestVersionDto = convertUp(inputCustomerDto, highestVersion);
+    public B toBaseDto(C inputDto){
+        C highestVersionDto = convertUp(inputDto, highestVersion);
         if( highestVersionDto instanceof HighestVersionable<?>){
             @SuppressWarnings("unchecked") HighestVersionable<B> versionDto = (HighestVersionable<B>) highestVersionDto;
             return versionDto.toBaseDto();
@@ -69,7 +55,10 @@ public class VersioningService<C extends DtoVersionable<C>, B extends Versioning
         throw new IllegalStateException("Could not convert to highest version");
     }
 
-    public CustomerDto toCustomerDto(CustomerDtoVersionable customer) {
-        return null;
+    public <T extends DtoVersionable<C>> T fromBaseDtoToSpecificVersion(B base, Class<T> targetVersionClass){
+        HighestVersionable<B> highestVersionable = base.toHighestDto();
+        @SuppressWarnings("unchecked") C c = (C) highestVersionable;
+        return convertDown(c, targetVersionClass);
     }
+
 }
