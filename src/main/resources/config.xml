@@ -1,0 +1,12 @@
+<versioningConfig>
+    <versioning uniqeRef="CustomerDto" mainEntity="class.path.CustomerDto">
+        <version versionNumber="1" class="class.path.CustomerDtoV1"/>
+        <version versionNumber="2" class="class.path.CustomerDtoV2"/>
+        <version versionNumber="3" class="class.path.CustomerDtoV3"/>
+    </versioning>
+    <versioning mainEntity="class.path.AddressDto">
+        <version versionNumber="1" class="class.path.AddressDtoV1"/>
+        <version versionNumber="2" class="class.path.AddressDtoV2"/>
+        <version versionNumber="3" class="class.path.AddressDtoV3"/>
+    </versioning>
+</versioningConfig>
